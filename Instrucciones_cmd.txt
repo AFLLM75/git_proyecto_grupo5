@@ -1,0 +1,21 @@
+Para ejecutar el archivo .sql desde el cmd teneis que hacer los siguientes pasos:
+
+	1- Instalar postgressql (omitir si ya lo teneis instalado)
+
+		sudo apt update
+		sudo apt install libpq-dev postgresql postgresql-contrib
+
+	2- Conectarse
+
+		sudo su postgres
+
+	3- Ir a la carpeta donde está el archivo guardado
+
+	4- Ejecutar esto:
+
+		psql -U postgres -f Creacion_db.sql
+
+		Esto hace que se ejecute todo lo que hay en el .sql(tablas,procedure y llamar procedure).
+
+
+
