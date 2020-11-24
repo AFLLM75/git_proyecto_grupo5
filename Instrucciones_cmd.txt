@@ -14,6 +14,7 @@ Para ejecutar el archivo .sql desde el cmd teneis que hacer los siguientes pasos
 	4- Ejecutar esto:
 
 		psql -U postgres -f Creacion_db.sql
+		psql -U grupo5_user -f Creacion_tablas.sql
 
 		Esto hace que se ejecute todo lo que hay en el .sql(tablas,procedure y llamar procedure).
 

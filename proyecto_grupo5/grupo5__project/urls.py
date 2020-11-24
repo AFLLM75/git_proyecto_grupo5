@@ -18,5 +18,6 @@ from django.urls import path
 from gratuito import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gratis/', views.wifi),
+    path('gratis/', views.select),
+
 ]
