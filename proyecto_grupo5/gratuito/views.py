@@ -16,7 +16,7 @@ def select(request):
                             user="grupo5_user",
                             password="patata")
     cursor = conn.cursor()
-    cursor.execute("SELECT ETRS89_COORD_X , ETRS89_COORD_Y , LONGITUD , LATITUD FROM wifi;")
+    cursor.execute("SELECT ETRS89_COORD_X,ETRS89_COORD_Y,LONGITUD,LATITUD FROM wifi;")
     html = '<html>'
     columns = [col[0] for col in cursor.description]
     for column in columns:
@@ -30,5 +30,18 @@ def select(request):
     cursor.close()
     conn.close()
     return HttpResponse(html)
+
+def insert(request):
+    conn = psycopg2.connect(dbname="wifi_db",
+                            user="grupo5_user",
+                            password="patata")
+    cursor = conn.cursor()
+    coordenada_x= request.POST["coordenada_x"]
+    coordenada_y= request.POST["coordenada_y"]
+    cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}');")
+    conn.commit()                                    
+    cursor.close()
+    conn.close()
+    return HttpResponse("Insertado")
 
 

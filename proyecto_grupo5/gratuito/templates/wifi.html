@@ -1,0 +1,16 @@
+
+<html>
+    <body>
+    <h1 align="center"> FREE WIFI </h1>
+    <br>
+    <form style='display: inline;' method="POST" action="/insertar">
+        {% csrf_token %}
+        <br>
+        <input type="text" name="coordenada_x" placeholder="Coordenada X" size="27"><br>
+        <input type="text" name="coordenada_y" placeholder="Coordenada y" size="27"><br>
+        <br>
+        <input type="submit" value="Guardar">
+    </form>
+    </body>
+
+</html>
