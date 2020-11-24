@@ -16,8 +16,19 @@ def select(request):
                             user="grupo5_user",
                             password="patata")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM wifi;")
-    result = cursor.fetchall()
+    cursor.execute("SELECT ETRS89_COORD_X , ETRS89_COORD_Y , LONGITUD , LATITUD FROM wifi;")
+    html = '<html>'
+    columns = [col[0] for col in cursor.description]
+    for column in columns:
+        html += str(column) + '|'
+    html += '<br>'
+    for empleado in cursor.fetchall():
+        for columna in empleado:
+            html += str(columna) + '|'
+        html += '<br>'
+    html += '</html>'
     cursor.close()
     conn.close()
-    return render(request, 'wifi.html', params)
+    return HttpResponse(html)
+
+
