@@ -31,6 +31,20 @@ def select(request):
     conn.close()
     return HttpResponse(html)
 
+'''=========================Ver Coordenadas==============================='''
+def selectcoordenadas(request):
+    conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cursor.execute("SELECT LONGITUD, LATITUD FROM wifi;")
+    result = cursor.fetchall()
+    params = {'longi_latid':result}
+    cursor.close()
+    conn.close()
+    return render(request, 'VerCoordenadas.html', params)
+
+
+
+
 def insert(request):
     conn = psycopg2.connect(dbname="wifi_db",
                             user="grupo5_user",

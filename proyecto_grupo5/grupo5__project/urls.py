@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('gratis/', views.select),
     path('insertar/', views.insert),
+    path('vercoordenadas/', views.selectcoordenadas),
 ]
