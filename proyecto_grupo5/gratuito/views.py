@@ -31,6 +31,26 @@ def select(request):
     conn.close()
     return HttpResponse(html)
 
+'''=========================Ver Coordenadas==============================='''
+def selectcoordenadas(request):
+    conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    equipament = request.GET.get('get_equipament', default='%')
+    cursor.execute(f"SELECT * FROM wifi WHERE equipament LIKE '{equipament}';")
+    result = cursor.fetchall()
+    cursor.execute(f"SELECT equipament FROM wifi;")
+    resultall = cursor.fetchall()
+    params = {
+        'wifi':result,
+        'equipamentall':resultall,
+    }
+    cursor.close()
+    conn.close()
+    return render(request, 'VerCoordenadas.html', params)
+
+
+
+
 def insert(request):
     conn = psycopg2.connect(dbname="wifi_db",
                             user="grupo5_user",
