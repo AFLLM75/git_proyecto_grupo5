@@ -46,9 +46,18 @@ def selectcoordenadas(request):
     }
     cursor.close()
     conn.close()
+    crear_mapa
     return render(request, 'VerCoordenadas.html', params)
 
+def crear_mapa():
+    import gmplot
+    # Create the map plotter:
+    apikey = 'maps'  # (your API key here)
+    gmap = gmplot.GoogleMapPlotter(41.38714, 2.17006, 13, apikey=apikey)
 
+    # Mark a hidden gem:
+    gmap.marker(41.38714, 2.17006, color='cornflowerblue')
+    gmap.draw('/gratuito/templates/map.html')
 
 
 def insert(request):
