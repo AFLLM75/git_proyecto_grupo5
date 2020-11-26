@@ -1,1 +1,1 @@
-SELECT * FROM barris WHERE idDistricte = '3';
+SELECT * FROM barris WHERE idDistricte = '%';

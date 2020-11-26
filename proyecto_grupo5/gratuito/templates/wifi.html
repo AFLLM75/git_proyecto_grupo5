@@ -1,17 +1,32 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <html>
     <body>
-    <h1 align="center"> FREE WIFI </h1>
-    <br>
-    <form method="GET" action="/districte">
-    <label for="id_districte">Prioridad:</label>
-        <select id="id_districte" name="get_iddistricte">
-            <option value="1">Ciutat Vella</option>
-            <option value="2">Eixample</option>
-            <option value="3">Sants-Montjuic</option>
-            <option value="4">Les Corts</option>
-        </select>
-     <input type="submit" value="Filtrar">
-     </form>
+        <h1 align="center"> FREE WIFI </h1>
+        <br>
+        <form>
+            <label for="id_districte">Districte:</label>
+            <select id="id_districte" name="get_iddistricte">
+                <option value="1">Ciutat Vella</option>
+                <option value="2">Eixample</option>
+                <option value="3">Sants-Montjuic</option>
+                <option value="4">Les Corts</option>
+                <option value="5">Sarrià-Sant Gervasi</option>
+                <option value="6">Gràcia</option>
+                <option value="7">Horta-Guinardó</option>
+                <option value="8">Nou Barris</option>
+                <option value="9">Sant Andreu</option>
+                <option value="10">Sant Martí</option>
+            </select>
+            <input type="submit" value="Filtrar">
+        </form>
+        {% for barri in barris %}
+            {{ barri.nom_barri }} <br>
+        {% endfor %}
     </body>
 </html>
+
