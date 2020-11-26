@@ -3,14 +3,15 @@
     <body>
     <h1 align="center"> FREE WIFI </h1>
     <br>
-    <form style='display: inline;' method="POST" action="/insertar">
-        {% csrf_token %}
-        <br>
-        <input type="text" name="coordenada_x" placeholder="Coordenada X" size="27"><br>
-        <input type="text" name="coordenada_y" placeholder="Coordenada y" size="27"><br>
-        <br>
-        <input type="submit" value="Guardar">
-    </form>
+    <form method="GET" action="/districte">
+    <label for="id_districte">Prioridad:</label>
+        <select id="id_districte" name="get_iddistricte">
+            <option value="1">Ciutat Vella</option>
+            <option value="2">Eixample</option>
+            <option value="3">Sants-Montjuic</option>
+            <option value="4">Les Corts</option>
+        </select>
+     <input type="submit" value="Filtrar">
+     </form>
     </body>
-
 </html>

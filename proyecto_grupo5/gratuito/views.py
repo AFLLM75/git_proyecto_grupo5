@@ -65,3 +65,22 @@ def insert(request):
     return HttpResponse("Insertado")
 
 
+def prueba(request):
+    conn = psycopg2.connect(dbname="wifi_db",
+                            user="grupo5_user",
+                            password="patata")
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    iddistricte= request.GET.get('get_iddistricte', default='%')
+    with open("debug.log", "w") as debug_file:
+        print(f"SELECT * FROM barris WHERE idDistricte = '{iddistricte}';", file=debug_file)
+    if iddistricte == 'Todas':
+        iddistricte = '%'
+    cursor.execute(F"SELECT * FROM barris WHERE idDistricte = '{iddistricte}';")
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    params = {'barris': result}
+    return render(request, 'wifi.html', params)
+
+def home_page(request):
+   return render(request,'wifi.html')

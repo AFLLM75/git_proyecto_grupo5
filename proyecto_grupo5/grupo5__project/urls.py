@@ -19,7 +19,9 @@ from gratuito import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gratis/', views.select),
+    path('wifi/', views.home_page),
+    path('coordenadas/', views.select),
     path('insertar/', views.insert),
     path('vercoordenadas/', views.selectcoordenadas),
+    path('districte/', views.prueba),
 ]
