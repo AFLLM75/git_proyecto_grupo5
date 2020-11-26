@@ -35,9 +35,15 @@ def select(request):
 def selectcoordenadas(request):
     conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    cursor.execute("SELECT LONGITUD, LATITUD FROM wifi;")
+    equipament = request.GET.get('get_equipament', default='%')
+    cursor.execute(f"SELECT * FROM wifi WHERE equipament LIKE '{equipament}';")
     result = cursor.fetchall()
-    params = {'longi_latid':result}
+    cursor.execute(f"SELECT equipament FROM wifi;")
+    resultall = cursor.fetchall()
+    params = {
+        'wifi':result,
+        'equipamentall':resultall,
+    }
     cursor.close()
     conn.close()
     return render(request, 'VerCoordenadas.html', params)
