@@ -24,4 +24,5 @@ urlpatterns = [
     path('insertar/', views.insert),
     path('vercoordenadas/', views.selectcoordenadas),
     path('districte/', views.prueba),
+    path('testvercoordenadas/',views.selectcoordenadas),
 ]

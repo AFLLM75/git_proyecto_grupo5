@@ -46,18 +46,33 @@ def selectcoordenadas(request):
     }
     cursor.close()
     conn.close()
-    crear_mapa
-    return render(request, 'VerCoordenadas.html', params)
+    crear_mapa()
+    return render(request, 'testvercoordenadas.html', params)
 
 def crear_mapa():
     import gmplot
     # Create the map plotter:
-    apikey = 'maps'  # (your API key here)
+    apikey = ''  # (your API key here)
     gmap = gmplot.GoogleMapPlotter(41.38714, 2.17006, 13, apikey=apikey)
 
     # Mark a hidden gem:
     gmap.marker(41.38714, 2.17006, color='cornflowerblue')
-    gmap.draw('/gratuito/templates/map.html')
+    gmap.draw('gratuito/templates/map.html')
+    with open('gratuito/templates/map.html', 'r') as fichero_entrada, \
+            open('gratuito/templates/map_modificado.html', 'w') as fichero_salida:
+
+        i = 0
+        for linea in fichero_entrada:
+            if i == 28:
+                print('{% block buscar_coordenadas %}', file=fichero_salida)
+                print('{% endblock %}', file=fichero_salida)
+            print(linea, file=fichero_salida, end='')
+            i = i + 1
+
+
+
+
+    # abrir mapa y modificar map.html en el body antes del  añadir
 
 
 def insert(request):

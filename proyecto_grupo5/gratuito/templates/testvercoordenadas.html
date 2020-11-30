@@ -1,5 +1,7 @@
-<html>
-    <body>
+{%extends "map_modificado.html"%}
+
+{% block buscar_coordenadas %}
+
     <h1 align="center"> Buscar localizacion {{logitud}}</h1>
 
     <br>
@@ -21,8 +23,4 @@
     {% endfor %}
     </form>
     <br>
-
-
-    </body>
-</html>
-
+{% endblock %}
