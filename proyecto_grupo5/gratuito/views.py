@@ -79,14 +79,15 @@ def prueba(request):
     nom_barris = request.GET.get('get_nom_barri', default='%')
     cursor.execute(f"SELECT * FROM barris WHERE nom_barri LIKE '{nom_barris}';")
     result = cursor.fetchall()
+    id_barris = request.GET.get('get_id_barri', default='%')
+    cursor.execute(f"SELECT idbarri FROM barris WHERE nom_barri LIKE '{id_barris}';")
+    resulidbarri = cursor.fetchall()
     cursor.execute(f"SELECT nom_barri FROM barris ORDER BY nom_barri ASC;")
     resultall = cursor.fetchall()
-    cursor.execute(f"SELECT idbarri FROM barris;")
-    resulbarri = cursor.fetchall()
     params = {
         'nom_barris':result,
         'barrisall':resultall,
-        'resulbarri':resulbarri,
+        'id_barris':resulidbarri,
             }
     cursor.close()
     conn.close()
@@ -103,7 +104,7 @@ def insert(request):
     longitud= request.POST["longitud"]
     latitud = request.POST["latitud"]
     equipament = request.POST["equipament"]
-    barri = request.POST["resulbarri"]
+    barri = request.POST["idbarris"]
     adreca = request.POST["adreca"]
     telefon = request.POST["telefon"]
     cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{barri}','{adreca}','{telefon}');")
