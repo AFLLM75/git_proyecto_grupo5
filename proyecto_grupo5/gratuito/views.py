@@ -36,7 +36,7 @@ def selectcoordenadas(request):
     conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     equipament = request.GET.get('get_equipament', default='%')
-    cursor.execute(f"SELECT * FROM wifi WHERE equipament LIKE '{equipament}';")
+    cursor.execute(f'SELECT * FROM wifi WHERE equipament LIKE %s; ',(equipament,))
     result = cursor.fetchall()
     cursor.execute(f"SELECT equipament FROM wifi;")
     resultall = cursor.fetchall()
@@ -46,21 +46,24 @@ def selectcoordenadas(request):
     }
     cursor.close()
     conn.close()
-    crear_mapa()
+    # print (result)
+    crear_mapa(result[0]['latitud'], result[0]['longitud'])
     return render(request, 'testvercoordenadas.html', params)
 
-def crear_mapa():
+'''=================================Crear Mapa==========================='''
+def crear_mapa(x,y):
     import gmplot
     # Create the map plotter:
-    apikey = ''  # (your API key here)
-    gmap = gmplot.GoogleMapPlotter(41.38714, 2.17006, 13, apikey=apikey)
+
+    APIKEY = 'AIzaSyD3SJ0Z-jhr5Y-PmW2Pe5CelLt2pKDTwdg'  # (your API key here)
+    gmap = gmplot.GoogleMapPlotter(41.38714, 2.17006, 13, Apikey=APIKEY)
 
     # Mark a hidden gem:
-    gmap.marker(41.38714, 2.17006, color='cornflowerblue')
+    gmap.marker(x, y, color='cornflowerblue')
     gmap.draw('gratuito/templates/map.html')
+    # insertamos dos lineas de codigo en el archivo generado automaticamente
     with open('gratuito/templates/map.html', 'r') as fichero_entrada, \
-            open('gratuito/templates/map_modificado.html', 'w') as fichero_salida:
-
+         open('gratuito/templates/map_modificado.html', 'w') as fichero_salida:
         i = 0
         for linea in fichero_entrada:
             if i == 28:
@@ -68,6 +71,7 @@ def crear_mapa():
                 print('{% endblock %}', file=fichero_salida)
             print(linea, file=fichero_salida, end='')
             i = i + 1
+###############################################################################
 
 
 
