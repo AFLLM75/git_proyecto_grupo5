@@ -9,8 +9,12 @@
         <h1 align="center"> FREE WIFI </h1>
         <br>
         <form>
-            <label for="id_districte">Districte:</label>
-            <select id="id_districte" name="get_iddistricte">
+            <label for="nom_barri">Barris:</label>
+            <select id="nom_barri" name="get_nom_barri">
+                {% for element in barrisall %}
+                    <option>{{ element.nom_barri }}</option>
+                {% endfor %}
+                <!--
                 <option value="1">Ciutat Vella</option>
                 <option value="2">Eixample</option>
                 <option value="3">Sants-Montjuic</option>
@@ -21,12 +25,16 @@
                 <option value="8">Nou Barris</option>
                 <option value="9">Sant Andreu</option>
                 <option value="10">Sant Martí</option>
+                -->
             </select>
-            <input type="submit" value="Filtrar">
+
+            <input type="submit" value="Localizar">
         </form>
+         <!--
         {% for barri in barris %}
-            {{ barri.nom_barri }} <br>
+             <option>{{ barri.nom_barris }}</option>
         {% endfor %}
+        -->
     </body>
 </html>
 

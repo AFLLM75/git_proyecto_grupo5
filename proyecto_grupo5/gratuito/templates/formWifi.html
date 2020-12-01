@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hotel Reservation Form</title>
+    <title>Punts Wifi BCN</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <style>
@@ -214,61 +214,64 @@
   </head>
   <body>
     <div class="testbox">
-    <form>
+    <form action="/insertar/" method="POST">
+        {% csrf_token %}
       <div class="banner">
-        <h1>punts WIFI bcn </h1>
+        <h1>PUNTS WIFI BCN</h1>
       </div>
       <br/>
       <fieldset>
         <legend>Dades de localització punts Wifi</legend>
         <div class="columns">
           <div class="item">
-            <label for="etrs89_coord_x">ETRS89 coordenada X<span>*</span></label>
+            <label for="etrs89_coord_x">ETRS89 COORDENADA X<span>*</span></label>
             <input id="etrs89_coord_x" type="text" name="etrs89_coord_x" />
           </div>
           <div class="item">
-            <label for="etrs89_coord_y"> ETRS89 coordenada Y<span>*</span></label>
+            <label for="etrs89_coord_y"> ETRS89 COORDENADA Y<span>*</span></label>
             <input id="etrs89_coord_y" type="text" name="etrs89_coord_y" />
           </div>
           <div class="item">
-            <label for="longitud">Longitud<span>*</span></label>
+            <label for="longitud">LONGITUD<span>*</span></label>
             <input id="longitud" type="text"   name="longitud" />
           </div>
           <div class="item">
-            <label for="latitud">Latitud<span>*</span></label>
+            <label for="latitud">LATITUD<span>*</span></label>
             <input id="latitud" type="text"   name="latitud" required/>
           </div> 
           <div class="item" style=width:100%>
-            <label for="equipament">Equipament<span>*</span></label>
+            <label for="equipament">EQUIPAMENT<span>*</span></label>
             <input id="equipament" type="text"   name="equipament" />
           </div>
-          
-<div class="item" style=width:100%>
-            <label for="adreca">Adreca<span>*</span></label>
-            <input id="adreca" type="text"   name="adreca" />
-          </div>
-         
-          <div class="item">
-            <label for="telefon">Telèfon<span>*</span></label>
-            <input id="telefon" type="tel"   name="telefon" />
-          </div>
-       <div class="item">
-        Barri
-        <p></p>
-        <select>
-        <option value="14" disabled selected>Barris</option>
-        <option value="15" >mmmmm mmmmmm</option>
-        <option value="16">1</option>
-        <option value="17">2</option>
-        <option value="18">3</option>
-        <option value="19">4</option>
-        <option value="19">5</option>
-        </select>
-        </div>   
 
-    </fieldset>
+           <div class="item" style=width:100%>
+            <label for="adreca">ADRE&Ccedil;A<span>*</span></label>
+            <input id="adreca" type="text"   name="adreca" />
+           </div>
+         
+           <div class="item">
+            <label for="telefon">TELÈFON<span>*</span></label>
+            <input id="telefon" type="tel"   name="telefon" />
+           </div>
+
+           <div class="item">
+            BARRIS
+            <p></p>
+            <select id="nom_barri" name="resulbarri" >
+                <option value="14" disabled selected>Seleccionar</option>
+
+                    {% for element in resulbarri %}
+                        <option> {{ element.idbarri}}</option>
+                    {% endfor %}
+
+            </select>
+
+            </div>
+        </div>
+      </fieldset>
+
       <div class="btn-block">
-      <button type="submit" href="/">Submit</button>
+      <button type="submit">Insertar</button>
       </div>
     </form>
     </div>

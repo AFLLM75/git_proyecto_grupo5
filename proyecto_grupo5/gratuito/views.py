@@ -73,42 +73,58 @@ def crear_mapa():
 
 
     # abrir mapa y modificar map.html en el body antes del  añadir
-
+def prueba(request):
+    conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    nom_barris = request.GET.get('get_nom_barri', default='%')
+    cursor.execute(f"SELECT * FROM barris WHERE nom_barri LIKE '{nom_barris}';")
+    result = cursor.fetchall()
+    cursor.execute(f"SELECT nom_barri FROM barris ORDER BY nom_barri ASC;")
+    resultall = cursor.fetchall()
+    cursor.execute(f"SELECT idbarri FROM barris;")
+    resulbarri = cursor.fetchall()
+    params = {
+        'nom_barris':result,
+        'barrisall':resultall,
+        'resulbarri':resulbarri,
+            }
+    cursor.close()
+    conn.close()
+    return render(request, 'formWifi.html', params)
 
 def insert(request):
+    print('insertando ando')
     conn = psycopg2.connect(dbname="wifi_db",
                             user="grupo5_user",
                             password="patata")
     cursor = conn.cursor()
-    coordenada_x= request.POST["coordenada_x"]
-    coordenada_y= request.POST["coordenada_y"]
-    cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}');")
+    coordenada_x= request.POST["etrs89_coord_x"]
+    coordenada_y = request.POST["etrs89_coord_y"]
+    longitud= request.POST["longitud"]
+    latitud = request.POST["latitud"]
+    equipament = request.POST["equipament"]
+    barri = request.POST["resulbarri"]
+    adreca = request.POST["adreca"]
+    telefon = request.POST["telefon"]
+    cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{barri}','{adreca}','{telefon}');")
     conn.commit()                                    
     cursor.close()
     conn.close()
-    return HttpResponse("Insertado")
-
+    return render(request, 'formWifi.html')
+"""
 def prueba(request):
-    iddistricte = request.GET.get('get_iddistricte', default=None)
-    #print(iddistricte)
-    if iddistricte is not None:
-        conn = psycopg2.connect(dbname="wifi_db",
+    barri= request.GET.get('get_nom_barri', default='%')
+
+    conn = psycopg2.connect(dbname="wifi_db",
                             user="grupo5_user",
                             password="patata")
-        cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        """
-        with open("debug.log", "w") as debug_file:
-            print(f"SELECT * FROM barris WHERE idDistricte = '{iddistricte}';", file=debug_file)
-        """
-        cursor.execute(f"SELECT nom_barri FROM barris WHERE idDistricte = %s",(iddistricte,))
-        result = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        params = {'barris': result}
-        return render(request, 'wifi.html', params)
-    else:
-        #print('he entrado en else')
-        return render(request, 'wifi.html')
-
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    cursor.execute(f"SELECT nom_barri FROM barris';")
+    result = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    params = {'barris': result}
+    return render(request, 'wifi.html', params)
+"""
 def home_page(request):
    return render(request, 'wifi.html')
