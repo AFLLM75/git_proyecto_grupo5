@@ -48,7 +48,7 @@ def selectcoordenadas(request):
     conn.close()
     # print (result)
     crear_mapa(result[0]['latitud'], result[0]['longitud'])
-    return render(request, 'testvercoordenadas.html', params)
+    return render(request, 'testwifiBCNcabecera.html', params)
 
 '''=================================Crear Mapa==========================='''
 def crear_mapa(x,y):
