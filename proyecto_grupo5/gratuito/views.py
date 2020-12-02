@@ -108,7 +108,7 @@ def insert(request):
     longitud= request.POST["longitud"]
     latitud = request.POST["latitud"]
     equipament = request.POST["equipament"]
-    barri = request.POST["idbarris"]
+    barri = request.POST["idbarri"]
     adreca = request.POST["adreca"]
     telefon = request.POST["telefon"]
     cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{barri}','{adreca}','{telefon}');")
@@ -133,3 +133,25 @@ def prueba(request):
 """
 def home_page(request):
    return render(request, 'wifi.html')
+
+'''=========================Ver por Barris ==============================='''
+def selectbarris(request):
+    conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    nom_barri = request.GET.get('get_barris', default='%')
+    print(nom_barri)
+    cursor.execute('SELECT wifi.equipament, adreca, telefon FROM wifi, barris'
+                   f' WHERE  barri=idBarri and idbarri=(SELECT idbarri FROM barris WHERE nom_barri=%s);',(nom_barri,))
+    result = cursor.fetchall()
+    cursor.execute(f"SELECT nom_barri FROM barris;")
+    resultodos = cursor.fetchall()
+
+    params = {
+        'dadesBarri':result,
+        'todosbarri':resultodos,
+    }
+    cursor.close()
+    conn.close()
+    # print (result)
+
+    return render(request, 'dadesperbarris.html', params)

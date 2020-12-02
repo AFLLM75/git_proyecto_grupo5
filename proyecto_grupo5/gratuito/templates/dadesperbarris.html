@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1 align="center"> Buscar por barrios </h1>
+
+<br>
+  <form>
+
+   <label for="barri">Selecciona el barrio visualizaras los  puntos wifi:</label><br>
+        <select id="barri" name="get_barris">
+            {% for element in todosbarri %}
+                <option>{{ element.nom_barri }}</option>
+            {% endfor %}
+        </select>
+      <input type="submit" value="buscar puntos wifi del barrio">
+<br>
+<table>
+  <tr>
+    <td>Equipamnet</td>
+    <td>Adreca</td>
+    <td>telefon</td>
+  </tr>
+   {% for element in dadesBarri %}
+  <tr>
+    <td>{{ element.equipament }}</td>
+    <td>{{ element.adreca }}</td>
+    <td>{{ element.telefon }}</td>
+  </tr>
+    {% endfor %}
+</table>
+
+    </form>
+    <br>
+</body>
+</html>
