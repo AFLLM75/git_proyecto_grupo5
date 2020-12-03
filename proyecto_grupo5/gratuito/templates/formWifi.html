@@ -257,14 +257,15 @@
            <div class="item">
             BARRIS
             <p></p>
-            <select id="nom_barri" name="get_nom_barri" >
-                <option value="14" disabled selected>Seleccionar</option>
+
+                 <select id="nom_barri" name="barri" >
+                    <option value="14" disabled selected>Seleccionar</option>
 
                     {% for element in barrisall %}
                         <option> {{ element.nom_barri}}</option>
                     {% endfor %}
 
-            </select>
+                 </select>
 
             </div>
         </div>
@@ -276,4 +277,3 @@
     </form>
     </div>
   </body>
-</html>

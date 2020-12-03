@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
 import psycopg2.extras
 # Create your views here.
 
@@ -73,20 +74,18 @@ def crear_mapa(x,y):
                 print('{% endblock %}', file=fichero_salida)
             print(linea, file=fichero_salida, end='')
             i = i + 1
-###############################################################################
-
-
 
 
     # abrir mapa y modificar map.html en el body antes del  añadir
 def prueba(request):
+
     conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     nom_barris = request.GET.get('get_nom_barri', default='%')
-    cursor.execute(f"SELECT * FROM barris WHERE nom_barri LIKE '{nom_barris}';")
+    cursor.execute(f"SELECT * FROM barris WHERE nom_barri LIKE %s; ",(nom_barris,))
     result = cursor.fetchall()
     id_barris = request.GET.get('get_id_barri', default='%')
-    cursor.execute(f"SELECT idbarri FROM barris WHERE nom_barri LIKE '{id_barris}';")
+    cursor.execute(f"SELECT idbarri FROM barris WHERE nom_barri LIKE %s; ",(id_barris,))
     resulidbarri = cursor.fetchall()
     cursor.execute(f"SELECT nom_barri FROM barris ORDER BY nom_barri ASC;")
     resultall = cursor.fetchall()
@@ -100,7 +99,7 @@ def prueba(request):
     return render(request, 'formWifi.html', params)
 
 def insert(request):
-    print('insertando ando')
+    #print('insertando ando')
     conn = psycopg2.connect(dbname="wifi_db",
                             user="grupo5_user",
                             password="patata")
@@ -110,14 +109,20 @@ def insert(request):
     longitud= request.POST["longitud"]
     latitud = request.POST["latitud"]
     equipament = request.POST["equipament"]
-    barri = request.POST["idbarri"]
+    nom_barri = request.POST["barri"]
+    cursor.execute(f"SELECT idbarri FROM barris  WHERE nom_barri  = %s; ",(nom_barri,))
+    idbarri = cursor.fetchone()[0]
     adreca = request.POST["adreca"]
     telefon = request.POST["telefon"]
-    cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{barri}','{adreca}','{telefon}');")
+    cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{idbarri}','{adreca}','{telefon}');")
     conn.commit()                                    
     cursor.close()
     conn.close()
-    return render(request, 'formWifi.html')
+    return redirect(prueba)
+
+
+
+
 """
 def prueba(request):
     barri= request.GET.get('get_nom_barri', default='%')
