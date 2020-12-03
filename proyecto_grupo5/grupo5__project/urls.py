@@ -22,7 +22,7 @@ urlpatterns = [
     path('wifi/', views.home_page),
     path('coordenadas/', views.select),
     path('insertar/', views.insert),
-    path('vercoordenadas/', views.selectcoordenadas),
     path('districte/', views.prueba),
     path('testvercoordenadas/',views.selectcoordenadas),
+    path('dadesperbarris/',views.selectbarris),
 ]
