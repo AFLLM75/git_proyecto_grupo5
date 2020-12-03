@@ -71,9 +71,6 @@ def crear_mapa(x,y):
                 print('{% endblock %}', file=fichero_salida)
             print(linea, file=fichero_salida, end='')
             i = i + 1
-###############################################################################
-
-
 
 
     # abrir mapa y modificar map.html en el body antes del  añadir
