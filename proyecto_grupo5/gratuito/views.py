@@ -67,6 +67,8 @@ def crear_mapa(x,y):
         i = 0
         for linea in fichero_entrada:
             if i == 28:
+                print('{% block cabecera %}', file=fichero_salida)
+                print('{% endblock %}', file=fichero_salida)
                 print('{% block buscar_coordenadas %}', file=fichero_salida)
                 print('{% endblock %}', file=fichero_salida)
             print(linea, file=fichero_salida, end='')
