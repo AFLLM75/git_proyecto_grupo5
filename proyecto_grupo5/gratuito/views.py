@@ -78,6 +78,7 @@ def crear_mapa(x,y):
 
     # abrir mapa y modificar map.html en el body antes del  añadir
 def prueba(request):
+
     conn = psycopg2.connect(dbname="wifi_db", user="grupo5_user",password="patata")
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     nom_barris = request.GET.get('get_nom_barri', default='%')
@@ -108,7 +109,11 @@ def insert(request):
     longitud= request.POST["longitud"]
     latitud = request.POST["latitud"]
     equipament = request.POST["equipament"]
+"""
     barri = request.POST["idbarri"]
+    barri = request.POST["get_nom_barri"]
+    cursor.execute(f"SELECT barri FROM wifi WHERE  LIKE '{barri}';")
+"""
     adreca = request.POST["adreca"]
     telefon = request.POST["telefon"]
     cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{barri}','{adreca}','{telefon}');")
@@ -116,6 +121,10 @@ def insert(request):
     cursor.close()
     conn.close()
     return render(request, 'formWifi.html')
+
+
+
+
 """
 def prueba(request):
     barri= request.GET.get('get_nom_barri', default='%')
