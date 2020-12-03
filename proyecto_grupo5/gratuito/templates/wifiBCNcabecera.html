@@ -1,23 +1,21 @@
 {%extends "map_modificado.html"%}
-
 {% block buscar_coordenadas %}
+{% endblock %}
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-<meta charset="utf-8"
+<meta charset="utf-8">
 
 <style>
 	button{
 		border: none;
- 		/*color: white;*/
  		text-align: center;
-		font-size: 15x
+		font-size: 50x
 	}
 
 	.button1 {
-		background-color:red;
-		color: white;
+		background-color:yellow;
+		color: coral;
 		width: 21%;}
 
 	.button2 {
@@ -31,8 +29,8 @@
 		width: 21%;}
 
 	.button4 {
-		background-color:yellow;
-		color: coral;
+		background-color:red;
+		color: white;
 		width: 21%;}
 
 </style>
@@ -41,7 +39,7 @@
 
 	<button class="button4">Visualitzar</button>
 	<button class="button1">Wifi_Barris</button>
-	
+		
 		<h><font color="red">WIFI_BARCELONA</font></h>
 
 	<button class="button3">Localització_Wifi</button>	
@@ -49,3 +47,5 @@
 
 </body>
 </html>
+
+{% endblock %}
