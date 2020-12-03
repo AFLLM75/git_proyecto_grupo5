@@ -106,14 +106,16 @@ def insert(request):
     longitud= request.POST["longitud"]
     latitud = request.POST["latitud"]
     equipament = request.POST["equipament"]
-"""
-    barri = request.POST["idbarri"]
-    barri = request.POST["get_nom_barri"]
-    cursor.execute(f"SELECT barri FROM wifi WHERE  LIKE '{barri}';")
-"""
+
+    #idbarri = request.POST["idbarri"]
+    #barri = request.GET.get('get_nom_barri')
+    nom_barri = request.POST["barri"]
+    cursor.execute(f"SELECT idbarri FROM barris  WHERE nom_barri  = '{nom_barri}';")
+    idbarri = cursor.fetchone()[0]
+
     adreca = request.POST["adreca"]
     telefon = request.POST["telefon"]
-    cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{barri}','{adreca}','{telefon}');")
+    cursor.execute(f"INSERT INTO wifi VALUES (default,'{coordenada_x}','{coordenada_y}','{longitud}','{latitud}','{equipament}','{idbarri}','{adreca}','{telefon}');")
     conn.commit()                                    
     cursor.close()
     conn.close()
