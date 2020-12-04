@@ -22,7 +22,7 @@ urlpatterns = [
     path('wifi/', views.home_page),
     path('coordenadas/', views.select),
     path('insertar/', views.insert),
-    path('districte/', views.prueba, name='districte'),
-    path('testvercoordenadas/',views.selectcoordenadas),
-    path('dadesperbarris/',views.selectbarris),
+    path('districte/', views.prueba, name ='districte'),
+    path('testvercoordenadas/',views.selectcoordenadas, name ='vercoordenadas'),
+    path('dadesperbarris/',views.selectbarris, name ='wifiperbarris'),
 ]

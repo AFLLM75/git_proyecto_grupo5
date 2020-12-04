@@ -3,11 +3,11 @@
 {% endblock %}
 {% block buscar_coordenadas %}
 
-    <h1 align="center"> Buscar localizacion </h1>
+<!--    <h1 align="center"> Buscar localizacion </h1>-->
 
     <br>
   <form>
-   <label for="equipament">Selecciona el punto Wifi gratuito:</label><br>
+   <label for="equipament">Selecciona el punto Wifi gratuito:</label><br><br>
    <select id="equipament" name="get_equipament">
         {% for element in equipamentall %}
             <option>{{ element.equipament }}</option>
@@ -18,10 +18,7 @@
 
 <br>
 
-<!--{% for element in wifi %}-->
-<!-- {{ element.longitud }} <br>-->
-<!-- {{ element.latitud }} <br>-->
-<!--    {% endfor %}-->
+
     </form>
     <br>
 {% endblock %}
